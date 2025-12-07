@@ -1,0 +1,13 @@
+[
+  {
+    "course_code": "CSE 332S",
+    "course_name": "Object-Oriented Software Development Laboratory",
+    "credits": 3,
+    "description": "Intensive focus on practical aspects of designing, implementing, and publishing object-oriented software. Topics include object-oriented analysis and design, design patterns, software development methodologies, refactoring, testing strategies, and collaborative development. Students will work in teams on a significant software development project using modern tools and practices. Emphasizes clean code, maintainability, and professional software engineering practices.",
+    "prerequisites": "CSE 247 or CSE 2407",
+    "category": "Software Systems (S)",
+    "typical_periods": "Fall, Spring",
+    "source": "WashU Bulletin 2025-26",
+    "scraped_at": "2025-12-07 12:54:38"
+  }
+]

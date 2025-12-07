@@ -1,0 +1,812 @@
+Title: Operators
+URL: https://www.geeksforgeeks.org/cpp/operators-in-cpp/
+Source: GeeksforGeeks
+Course: Programming Fundamentals
+
+================================================================================
+
+C++ operators are the symbols that operate on values to perform specific mathematical or logical computations on given values. They are the foundation of any programming language.
+C++
+#include
+<iostream>
+using
+namespace
+std
+;
+int
+main
+()
+{
+int
+a
+=
+10
++
+20
+;
+cout
+<<
+a
+;
+return
+0
+;
+}
+Output
+30
+Explanation: Here, '
++
+' is an
+addition operator
+and does the addition of 10 and 20 operands and return value 30 as a result.
+C++ Operator Types
+C++ operators are classified into
+6 types
+on the basis of type of operation they perform:
+1. Arithmetic Operators
+Arithmetic operators
+are used to perform arithmetic or mathematical operations on the operands. For example, '
++
+' is used for addition.
+Addition
+, +, Adds two operands
+Subtraction
+, -, Subtracts second operand from the first
+Multiplication
+, *, Multiplies two operands
+Division
+, /, Divides first operand by the second operand
+Modulo Operation
+, %, Returns the remainder of an integer division
+Increment
+, ++, Increases the value of operand by 1
+Decrement
+, --, Decreases the value of operand by 1
+C++
+#include
+<iostream>
+using
+namespace
+std
+;
+int
+main
+()
+{
+int
+a
+=
+8
+,
+b
+=
+3
+;
+// Addition
+cout
+<<
+"a + b = "
+<<
+(
+a
++
+b
+)
+<<
+endl
+;
+// Subtraction
+cout
+<<
+"a - b = "
+<<
+(
+a
+-
+b
+)
+<<
+endl
+;
+// Multiplication
+cout
+<<
+"a * b = "
+<<
+(
+a
+*
+b
+)
+<<
+endl
+;
+// Division
+cout
+<<
+"a / b = "
+<<
+(
+a
+/
+b
+)
+<<
+endl
+;
+// Modulo
+cout
+<<
+"a % b = "
+<<
+(
+a
+%
+b
+)
+<<
+endl
+;
+// Increament
+cout
+<<
+"++a = "
+<<
+++
+a
+<<
+endl
+;
+// Decrement
+cout
+<<
+"b-- = "
+<<
+b
+--
+;
+return
+0
+;
+}
+Output
+a + b = 11
+a - b = 5
+a * b = 24
+a / b = 2
+a % b = 2
+++a = 9
+--b = 2
+Important Points:
+The
+Modulo operator
+(%) operator should only be used with integers. Other operators can also be used with floating point values.
+++a
+and
+a++
+, both are increment operators, however, both are slightly different. In
+++a
+, the value of the variable is incremented first and then it is used in the program. In
+a++
+, the value of the variable is assigned first and then it is incremented. Similarly happens for the decrement operator.
+You may have noticed that some operator works on two operands while other work on one. On the basis of this operators are also classified as:
+Unary
+: Works on single operand.
+Binary: Works on two operands.
+Ternary: Works on three operands.
+2. Relational Operators
+Relational operators
+are used for the comparison of the values of two operands. For example, '>' check right operand is greater.
+Is Equal To
+, ==, Checks if both operands are equal
+Greater Than
+, >, Checks if the first operand is greater than the second operand
+Greater Than or Equal To
+, >=, Checks if the first operand is greater than or equal to the second operand
+Less Than
+, <, Checks if the first operand is lesser than the second operand
+Less Than or Equal To
+, <=, Checks if the first operand is lesser than or equal to the second operand
+Not Equal To
+, !=, Checks if both operands are not equal
+C++
+#include
+<iostream>
+using
+namespace
+std
+;
+int
+main
+()
+{
+int
+a
+=
+6
+,
+b
+=
+4
+;
+// Equal operator
+cout
+<<
+"a == b is "
+<<
+(
+a
+==
+b
+)
+<<
+endl
+;
+// Greater than operator
+cout
+<<
+"a > b is "
+<<
+(
+a
+>
+b
+)
+<<
+endl
+;
+// Greater than Equal to operator
+cout
+<<
+"a >= b is "
+<<
+(
+a
+>=
+b
+)
+<<
+endl
+;
+//  Lesser than operator
+cout
+<<
+"a < b is "
+<<
+(
+a
+<
+b
+)
+<<
+endl
+;
+// Lesser than Equal to operator
+cout
+<<
+"a <= b is "
+<<
+(
+a
+<=
+b
+)
+<<
+endl
+;
+// Not equal to operator
+cout
+<<
+"a != b is "
+<<
+(
+a
+!=
+b
+);
+return
+0
+;
+}
+Output
+a == b is 0
+a > b is 1
+a >= b is 1
+a < b is 0
+a <= b is 0
+a != b is 1
+Note: 0 denotes false and 1 denotes true.
+3. Logical Operators
+Logical operators
+are used to combine two or more conditions or constraints or to complement the evaluation of the original condition in consideration. The result returns a Boolean value, i.e., true or false.
+Logical AND
+, &&, Returns true only if all the operands are true or non-zero
+Logical OR
+, ||, Returns true if either of the operands is true or non-zero
+Logical NOT
+, !, Returns true if the operand is false or zero
+C++
+#include
+<iostream>
+using
+namespace
+std
+;
+int
+main
+()
+{
+int
+a
+=
+6
+,
+b
+=
+4
+;
+// Logical AND operator
+cout
+<<
+"a && b is "
+<<
+(
+a
+&&
+b
+)
+<<
+endl
+;
+// Logical OR operator
+cout
+<<
+"a || b is "
+<<
+(
+a
+||
+b
+)
+<<
+endl
+;
+// Logical NOT operator
+cout
+<<
+"!b is "
+<<
+(
+!
+b
+);
+return
+0
+;
+}
+Output
+a && b is 1
+a || b is 1
+!b is 0
+4. Bitwise Operators
+Bitwise operators
+are works on bit-level. So, compiler first converted to bit-level and then the calculation is performed on the operands.
+Binary AND
+, &, Copies a bit to the result if it exists in both operands
+Binary OR
+, |, Copies a bit to the result if it exists in any of the operands
+Binary XOR
+, ^, Copies the bit to the result if it is present in either of the operands but not both
+Left Shift
+, <<, Shifts the value to the left by the number of bits specified by the right operand
+Right Shift
+, >>, Shifts the value to the right by the number of bits specified by the right operand
+One's Complement
+,
+~
+, Changes binary digits 1 to 0 and 0 to 1
+Note:
+Only char and int data types can be used with Bitwise Operators.
+C++
+#include
+<iostream>
+using
+namespace
+std
+;
+int
+main
+()
+{
+int
+a
+=
+6
+,
+b
+=
+4
+;
+// Binary AND operator
+cout
+<<
+"a & b is "
+<<
+(
+a
+&
+b
+)
+<<
+endl
+;
+// Binary OR operator
+cout
+<<
+"a | b is "
+<<
+(
+a
+|
+b
+)
+<<
+endl
+;
+// Binary XOR operator
+cout
+<<
+"a ^ b is "
+<<
+(
+a
+^
+b
+)
+<<
+endl
+;
+// Left Shift operator
+cout
+<<
+"a << 1 is "
+<<
+(
+a
+<<
+1
+)
+<<
+endl
+;
+// Right Shift operator
+cout
+<<
+"a >> 1 is "
+<<
+(
+a
+>>
+1
+)
+<<
+endl
+;
+// One’s Complement operator
+cout
+<<
+"~(a) is "
+<<
+~
+(
+a
+);
+return
+0
+;
+}
+Output
+a & b is 4
+a | b is 6
+a ^ b is 2
+a<<1 is 12
+a>>1 is 3
+~(a) is -7
+5. Assignment Operators
+Assignment operators
+are used to assign value to a variable. We assign the value of right operand into left operand according to which assignment operator we use.
+Assignment
+, =, Assigns the value on the right to the variable on the left
+Add and Assignment
+, +=, Adds the right operand to the left operand and assigns the result to the left operand
+Subtract and Assignment
+, -=, Subtracts the right operand from the left operand and assigns the result to the left operand
+Multiply and Assignment
+, *=, Multiplies the left operand by the right operand and assigns the result to the left operand
+Divide and Assignment
+, /=, Divides the left operand by the right operand and assigns the result to the left operand
+C++
+#include
+<iosteam>
+using
+namespace
+std
+;
+int
+main
+()
+{
+int
+a
+=
+6
+,
+b
+=
+4
+;
+// Assignment Operator.
+cout
+<<
+"a = "
+<<
+a
+<<
+endl
+;
+//  Add and Assignment Operator.
+cout
+<<
+"a += b is "
+<<
+(
+a
++=
+b
+)
+<<
+endl
+;
+// Subtract and Assignment Operator.
+cout
+<<
+"a -= b is "
+<<
+(
+a
+-=
+b
+)
+<<
+endl
+;
+//  Multiply and Assignment Operator.
+cout
+<<
+"a *= b is "
+<<
+(
+a
+*=
+b
+)
+<<
+endl
+;
+//  Divide and Assignment Operator.
+cout
+<<
+"a /= b is "
+<<
+(
+a
+/=
+b
+);
+return
+0
+;
+}
+Output
+a = 6
+a += b is 10
+a -= b is 6
+a *= b is 24
+a /= b is 6
+6. Ternary or Conditional Operators
+Conditional operator
+returns the value, based on the condition. This operator takes
+three operands
+, therefore it is known as a
+Ternary Operator
+.
+Syntax:
+C++
+Expression1
+?
+Expression2
+:
+Expression3
+In the above statement:
+The ternary operator
+?
+determines the answer on the basis of the evaluation of
+Expression1
+.
+If
+Expression1
+is true, then
+Expression2
+gets evaluated.
+If
+Expression1
+is false, then
+Expression3
+gets evaluated.
+C++
+#include
+<iostream>
+using
+namespace
+std
+;
+int
+main
+()
+{
+int
+a
+=
+3
+,
+b
+=
+4
+;
+// Conditional Operator
+int
+result
+=
+(
+a
+<
+b
+)
+?
+b
+:
+a
+;
+cout
+<<
+"The greatest number "
+"is "
+<<
+result
+;
+return
+0
+;
+}
+Output
+The greatest number is 4
+Miscellaneous Operators
+Apart from these operators, there are a few operators that do not fit in any of the above categories. These are:
+1. sizeof Operator
+sizeof operator
+is a unary operator used to compute the size of its operand or variable in bytes. For example,
+C++
+sizeof
+(
+char
+);
+sizeof
+(
+var_name
+);
+2. Comma Operator (,)
+Comma operator
+is a binary operator that is used for multiple purposes. It is used as a separator or used to evaluate its first operand and discards the result; it then evaluates the second operand and returns this value (and type).
+C++
+int
+n
+=
+(
+m
++
+1
+,
+m
+-2
+,
+m
++
+5
+);
+int
+a
+,
+b
+,
+c
+;
+3. Addressof Operator (&)
+Addressof operator
+is used to find the memory address in which a particular variable is stored. In C++, it is also used to create a
+reference
+.
+C++
+&
+var_name
+;
+4. Dot Operator(.)
+Dot operator
+is used to access members of structure variables or class objects using their object names.
+C++
+obj
+.
+member
+;
+5. Arrow Operator
+Arrow operator
+is used to access the variables of classes or structures through its pointer.
+C++
+sptr
+->
+member
+;
+6. Casting Operators
+Casting operators
+are used to convert the value of one data type to another data type. For example, for an integer value x:
+C++
+(
+float
+)
+x
+static_cast
+<
+float
+>
+(
+x
+)
+Operator Precedency and Associativity
+When there are multiple operators in a single expression,
+operator precedency and associativity
+decide in which order and which part of expression are calculate. Precedency tells which part of expression should be calculate first and associativity tells which direction to solve when same precedency operators are in expression.
+Operator Precedence
+Operator precedence says which operation is calculate first in the expression when expression have different precedency operators. For example:
+3 * 2 + 8;
+Will be evaluated as:
+(3 * 2) + 8 = 14
+It is because
+multiplication (*)
+have higher precedency then
+addition (+).
+Operator Associativity
+Operator associativity says if expression have more than one operator with same precedence then calculation happen in
+right to left
+or
+left to right.
+50 / 25 * 2
+= 1
+Will be evaluated as:
+(50 / 25) * 2
+Create Quiz
+Operators in C++
+Visit Course
+Comment
+A
+anshikajain26
+Follow
+52
+Improve
+A
+anshikajain26
+Follow
+52
+Improve
+Article Tags :
+Misc
+C++
+cpp-operator

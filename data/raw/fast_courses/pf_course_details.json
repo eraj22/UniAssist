@@ -1,0 +1,75 @@
+{
+  "course_code": "CS-101",
+  "course_name": "Programming Fundamentals",
+  "credit_hours": 4,
+  "theory_hours": 3,
+  "lab_hours": 1,
+  "prerequisites": null,
+  "co_requisites": null,
+  "semester_offered": [
+    1
+  ],
+  "category": "Core Computer Science",
+  "description": "This course introduces students to the fundamental concepts of computer programming \n            using C++. Students will learn problem-solving techniques, algorithm development, \n            and structured programming. The course covers basic data types, control structures, \n            functions, arrays, pointers, structures, and file handling. Lab sessions provide \n            hands-on programming experience.",
+  "objectives": [
+    "Understand basic programming concepts and logic",
+    "Develop problem-solving skills using algorithms",
+    "Write, compile, and debug C++ programs",
+    "Work with arrays, pointers, and structures",
+    "Implement file handling operations"
+  ],
+  "learning_outcomes": [
+    "Design algorithms and flowcharts for problem solving",
+    "Implement programs using control structures and functions",
+    "Use arrays and pointers effectively",
+    "Create and manipulate user-defined data types",
+    "Perform file input/output operations"
+  ],
+  "topics_covered": [
+    "Introduction to Programming and C++",
+    "Data Types, Variables, and Operators",
+    "Control Structures (if, switch, loops)",
+    "Functions and Recursion",
+    "Arrays (1D and 2D)",
+    "Pointers and Dynamic Memory",
+    "Structures and Unions",
+    "File Handling",
+    "Strings",
+    "Introduction to OOP concepts"
+  ],
+  "assessment": {
+    "assignments": "15%",
+    "quizzes": "10%",
+    "midterm": "25%",
+    "final": "40%",
+    "lab": "10%"
+  },
+  "textbooks": [
+    {
+      "title": "C++ How to Program",
+      "authors": "Deitel & Deitel",
+      "edition": "10th Edition",
+      "type": "Primary"
+    },
+    {
+      "title": "Problem Solving with C++",
+      "authors": "Walter Savitch",
+      "edition": "9th Edition",
+      "type": "Reference"
+    }
+  ],
+  "tools_used": [
+    "Visual Studio / Code::Blocks",
+    "GCC Compiler",
+    "Online C++ Compilers"
+  ],
+  "typical_schedule": {
+    "lectures_per_week": 3,
+    "lab_sessions_per_week": 1,
+    "total_weeks": 16,
+    "homework_hours_per_week": "6-8"
+  },
+  "university": "FAST NUCES Islamabad",
+  "source": "Official Course Outline",
+  "last_updated": "2025-12-07"
+}

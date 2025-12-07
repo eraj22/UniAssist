@@ -1,0 +1,398 @@
+Title: Functions
+URL: https://www.geeksforgeeks.org/cpp/functions-in-cpp/
+Source: GeeksforGeeks
+Course: Programming Fundamentals
+
+================================================================================
+
+A Function is a reusable block of code designed to perform a specific task. It helps break large programs into smaller, logical parts. Functions make code cleaner, easier to understand, and more maintainable.
+Just like in other languages, C++ functions can take inputs (called parameters), execute a block of statements, and optionally return a result. C++ also supports advanced features like
+function overloading
+,
+default arguments
+, and
+inline functions
+, which give more flexibility compared to C.
+C++
+#include
+<iostream>
+using
+namespace
+std
+;
+// Void function definition
+void
+hello
+()
+{
+cout
+<<
+"GeeksforGeeks"
+<<
+endl
+;
+}
+// Return-type function definition
+int
+square
+(
+int
+x
+)
+{
+return
+x
+*
+x
+;
+}
+int
+main
+()
+{
+// Calling the void function
+hello
+();
+// Calling the return-type function
+int
+result
+=
+square
+(
+5
+);
+cout
+<<
+"Square of 5 is: "
+<<
+result
+<<
+endl
+;
+return
+0
+;
+}
+Output
+GeeksforGeeks
+Square of 5 is: 25
+In the above example, there are three functions:
+main() function:
+This is the entry point of every C++ program. When the program runs, execution starts from the main function. It contains the calls to the other functions.
+hello() function:
+This is a user-defined function that does not take any parameters and does not return a value. It simply prints "GeeksforGeeks" to the console. The return type void indicates that it doesn't return anything.
+square(int x) function:
+This is another user-defined function that takes an integer as input and returns the square of that number. The return type int means the function will return an integer value. In main(), the function is called with the value 5, and the returned result is stored in a variable and printed.
+Understanding Function Structure and Usage
+To work with functions in C++, it is important to understand how they are written, declared, and called. This section covers function syntax, declaration vs definition, and how to call a function in a program.
+Function Syntax in C++
+A function in C++ follows this general format:
+C++
+return_type
+function_name
+(
+parameter_list
+)
+{
+// body of the function
+}
+Each part has a specific role:
+Return type
+: Specifies what type of value the function returns. Use void if there is no return value.
+Function name
+: The name you will use to call the function.
+Parameter list
+: Inputs that the function accepts. It can be empty if no inputs are needed.
+Function body
+: The block of code that runs when the function is called.
+Function Declaration vs Definition
+Function Declaration
+introduces the function to the compiler. It tells the compiler the return type, name, and parameters but does not include the body. It ends with a semicolon.
+C++
+// Declaration
+int
+add
+(
+int
+,
+int
+);
+Function Definition
+provides the actual implementation of the function.
+C++
+int
+add
+(
+int
+a
+,
+int
+b
+)
+{
+return
+a
++
+b
+;
+}
+Declaration is useful when the function is defined later in the code or in a separate file.
+Why is Declaration Needed in C++?
+In C++, if a function is defined after the main function or any other function that tries to use it, the compiler will not recognize it unless a declaration is provided earlier in the code. This declaration tells the compiler about the function's name, return type, and parameters in advance.
+Function declarations are especially useful in larger programs where functions are defined later in the file or in separate source files. By declaring the function before it's used, the compiler can ensure the function is called correctly.
+In simple terms, the
+declaration introduces the function to the compiler
+, while the
+definition provides the actual implementation
+.
+Calling a Function
+Once a function is defined, you can use it by simply calling its name followed by parentheses. This tells the program to execute the code inside that function.
+If the function takes parameters, you pass the required values inside the parentheses. If it doesn’t take any parameters, you just use empty parentheses.
+C++
+#include
+<iostream>
+using
+namespace
+std
+;
+// Function with no parameters and no return value
+void
+greet
+()
+{
+cout
+<<
+"Welcome to C++ Programming!"
+<<
+endl
+;
+}
+// Function with parameters and a return value
+int
+multiply
+(
+int
+a
+,
+int
+b
+)
+{
+return
+a
+*
+b
+;
+}
+int
+main
+()
+{
+// Calling the greet function
+greet
+();
+// Calling the multiply function
+int
+result
+=
+multiply
+(
+4
+,
+5
+);
+cout
+<<
+"Multiplication result: "
+<<
+result
+<<
+endl
+;
+return
+0
+;
+}
+Output
+Welcome to C++ Programming!
+Multiplication result: 20
+In above example, two functions are defined and called:
+greet() function:
+This function does not take any parameters and does not return a value. It simply prints a welcome message. It is called in main() using greet();.
+multiply(int a, int b) function:
+This function takes two integers as input, multiplies them, and returns the result. In main(), it is called with the values 4 and 5, and the returned value is stored in the variable result, which is then printed.
+Function calls allow you to reuse code easily. You can call the same function multiple times with different inputs to perform repeated tasks in a structured and clean way.
+Types of Functions in C++
+In C++, functions can be broadly categorized based on two criteria:
+1. Based on origin
+Library Functions
+: These are built-in functions provided by C++ standard libraries, such as
+cout
+,
+sqrt()
+,
+abs()
+, and
+getline()
+. You can use them by including appropriate
+headers
+like <iostream>, <cmath>, or <string>.
+User-Defined Functions
+: These are functions created by the programmer to perform specific tasks in the program.
+2. Based on input and return type
+User-defined functions can be further classified based on whether they accept parameters or return a value:
+No parameters, no return value:
+The function performs a task but does not take input or return anything.
+Parameters, no return value:
+The function takes input but does not return a result.
+No parameters, return value:
+The function returns a result but does not take any input.
+Parameters and return value:
+The function takes input and returns a result.
+These types help you design functions according to the task they need to perform. Choosing the right form improves code flexibility and clarity.
+Parameters or Arguments
+A function can also take some input data to process. These values are called
+function arguments
+and are supplied to the function at the function call. To receive these values, we define placeholder variables called
+parameter
+inside parenthesis in function definition. They should be specified with their types and names.
+C++
+return_type
+name
+(
+type1
+name1
+,
+type2
+name2
+...)
+{
+// Function body
+return
+val
+;
+}
+name1
+,
+name2
+and so on are the parameter names using which they will be accessed in the function.
+Example:
+C++
+#include
+<iostream>
+using
+namespace
+std
+;
+// Defining function that prints given number
+void
+printNum
+(
+int
+n
+){
+cout
+<<
+n
+<<
+endl
+;
+}
+int
+main
+()
+{
+int
+num1
+=
+10
+;
+int
+num2
+=
+99
+;
+// Calling printNum and passing both
+// num1 and num2 to it one by one
+printNum
+(
+num1
+);
+printNum
+(
+num2
+);
+return
+0
+;
+}
+Output
+10
+99
+In the above program,
+printNum()
+function is defined with one integer parameter
+n
+that it prints. It means that it will take one value of integer type while calling and print it. We called
+printNum()
+two times, one with
+num1
+and one with
+num2
+, and in each call, it prints the given number.
+Note:
+We refer to the passed argument using the name
+n
+not
+num1
+or
+num2
+in the function. It is due to the concept called
+scope of variables
+in the
+main
+and
+printNum()
+function.
+Here, there can be one question. Why didn't we call the function with both numbers at once? The answer lies in the
+printNum()
+definition. We have defined the function that only takes one value of integer type as parameter, so we cannot pass two values. In other words,
+A function can only take as many arguments as specified in the function definition and it is compulsory to pass them while calling it. Also, they should be of same type as in the function definition.
+There are also other different ways to pass arguments to the function in C++. Refer to this article to know more -
+Parameter Passing Techniques in C++
+Lambda Functions in C++
+Functions in C++ are declared and defined in global scope or class scope. So, C++ 11 introduced
+lambda expressions
+to allow inline functions which can be used for short snippets of code that are not going to be reused. Therefore, they do not require a name. They are mostly used in STL algorithms as callback functions.
+Note:
+The concepts covered above focus on function types and uses within procedural programming. However, C++ also supports advanced features like
+function overloading
+,
+default arguments
+,
+inline functions
+, and
+member functions
+within classes. These features are part of
+C++'s object-oriented programming
+capabilities and will be covered separately in dedicated sections.
+Create Quiz
+Functions in C++
+Visit Course
+Functions in C++
+Applications of Functions.
+How Functions Work in C++?
+Comment
+K
+kartik
+Follow
+530
+Improve
+K
+kartik
+Follow
+530
+Improve
+Article Tags :
+C++
+CPP-Functions

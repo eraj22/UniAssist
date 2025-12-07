@@ -1,0 +1,254 @@
+Title: Inline Functions
+URL: https://www.geeksforgeeks.org/cpp/inline-functions-cpp/
+Source: GeeksforGeeks
+Course: Programming Fundamentals
+
+================================================================================
+
+An inline function is a function in C++ whose code is expanded at the point of call at compile time. It reduces function-call overhead.
+The inline keyword suggests replacing a function call with its code to reduce overhead.
+Inlining is a request, not guaranteed by the compiler.
+The compiler may ignore inlining if the function contains loops, recursion, static variables, switch/goto, or a non-void function without a return statement..
+C++
+#include
+<stdio.h>
+// Inline function to calculate sum
+inline
+int
+getSum
+(
+int
+a
+,
+int
+b
+)
+{
+return
+a
++
+b
+;
+}
+int
+main
+()
+{
+int
+num1
+=
+5
+,
+num2
+=
+10
+;
+// Call inline function
+int
+result
+=
+getSum
+(
+num1
+,
+num2
+);
+// Display the result
+printf
+(
+"Sum: %d
+\n
+"
+,
+result
+);
+return
+0
+;
+}
+Output
+Sum: 15
+Need for Inline Functions
+Function calls involve overhead from storing the return address, passing arguments, and returning control, which can be significant for small, frequently used functions.
+Inline functions help eliminate this overhead by replacing the function call with the actual code, improving efficiency.
+Inline functions are useful only when the function call overhead is higher than the function’s execution time.
+An example where the inline function has no effect at all:
+C++
+#include
+<stdio.h>
+// Inline function (but compiler may ignore it)
+inline
+void
+displayMessage
+()
+{
+for
+(
+int
+i
+=
+0
+;
+i
+<
+5
+;
+i
+++
+)
+{
+printf
+(
+"Hello %d
+\n
+"
+,
+i
+);
+}
+}
+int
+main
+()
+{
+displayMessage
+();
+return
+0
+;
+}
+Output
+Hello 0
+Hello 1
+Hello 2
+Hello 3
+Hello 4
+The function contains a loop, making it large.
+Modern compilers may ignore inline for bigger functions.
+The program works the same whether inline is used or not.
+Behaviour of Inline Functions
+Inlined functions have their body replace the call at compile time, so no separate symbol is created.
+Inlining is optional; the compiler may choose not to inline the function.
+Non-inlined functions generate a real definition, which can cause multiple-definition errors if used in headers across files.
+C++ allows identical inline functions in multiple files, making them safe for headers, templates, and class definitions.
+Inline Functions in Class
+All the functions defined inside the class are implicitly inline. Thus, all the restrictions of inline functions are also applied here. If you need to explicitly declare an inline function in the class, then just declare the function inside the class and define it outside the class using the inline keyword.
+C++
+#include
+<iostream>
+using
+namespace
+std
+;
+class
+A
+{
+public
+:
+// declare inline
+inline
+int
+square
+(
+int
+x
+);
+};
+// Define the function
+inline
+int
+A::square
+(
+int
+x
+)
+{
+return
+x
+*
+x
+;
+}
+int
+main
+()
+{
+A
+obj
+;
+cout
+<<
+obj
+.
+square
+(
+3
+);
+return
+0
+;
+}
+Output
+9
+Virtual Functions Inlining
+Virtual functions are resolved at runtime based on the actual object type.
+Inlining happens at compile time, where the compiler replaces the function call with its body.
+Since the compiler cannot know which virtual function will be called at compile time, it cannot inline virtual functions.
+In short, runtime resolution conflicts with compile-time inlining, making inlining of virtual functions impossible.
+I
+nline vs Macros
+In C++, both inline functions and macros reduce function call overhead for faster execution, but they differ in behavior. Inline functions provide better safety and scoping, while macros are simple preprocessor directives. The table below shows their main differences.
+Aspect
+Inline Functions
+Macros
+Definition
+Inline functions are functions defined with the
+inline
+keyword.
+Macros are preprocessor directives defined using.
+#define
+.
+Scope
+Inline functions have scope and type checking, like regular functions.
+Macros have no scope or type checking. They are replaced by the preprocessor.
+Evaluation of Arguments
+Arguments are evaluated once.
+Arguments may be evaluated multiple times (e.g., in expressions).
+Handling
+Inline functions are handled by the compiler.
+Macros are handled by the preprocessor.
+Private Members
+Can access private members of a class.
+Cannot access private members of a class.
+Execution Overhead
+Compiler may ignore the
+inline
+request if the function is too large.
+Macros are always substituted into code.
+Recursion
+Inline functions can call themselves recursively.
+Macros cannot be recursive.
+Advantages
+Function call overhead doesn't occur.
+Inlining allows the compiler to apply context-specific optimizations not possible with normal function calls.
+Small inline functions can reduce code size, which is useful in embedded systems.
+Disadvantages
+Inlining increases the number of variables and registers used at each call.
+Excessive inlining can enlarge the binary and reduce instruction cache efficiency.
+Changes in an inline function require recompiling all calling locations.
+Inline functions may not suit embedded systems where code size is more critical than speed.
+Create Quiz
+Inline Function
+Visit Course
+Comment
+K
+kartik
+397
+Improve
+K
+kartik
+397
+Improve
+Article Tags :
+C++
+CPP-Functions

@@ -1,0 +1,481 @@
+Title: Lambda Expression
+URL: https://www.geeksforgeeks.org/cpp/lambda-expression-in-c/
+Source: GeeksforGeeks
+Course: Programming Fundamentals
+
+================================================================================
+
+C++ 11 introduced
+lambda expressions
+to allow inline functions which can be used for short snippets of code that are not going to be reused. Therefore, they do not require a name. They are mostly used in STL algorithms as callback functions.
+C++
+#include
+<iostream>
+using
+namespace
+std
+;
+int
+main
+()
+{
+// Defining a lambda
+auto
+res
+=
+[](
+int
+x
+)
+{
+return
+x
++
+x
+;
+};
+// Using the lambda
+cout
+<<
+res
+(
+5
+);
+return
+0
+;
+}
+Output
+10
+The lambda expression in the above program takes an integer
+x
+as input and returns the sum of
+x
+with itself. The result of
+res(5)
+prints
+10
+, as the lambda doubles the value of
+5.
+Syntax
+C++
+[
+capture
+-
+clause
+]
+(
+parameters
+)
+->
+return
+-
+type
+{
+// definition
+}
+To learn how to use lambda expressions effectively in your C++ programs, the
+C++ Course
+provides detailed explanations and examples.
+Return Type
+Generally, the
+return-type
+in lambda expressions is evaluated by the compiler itself and we don’t need to specify it explicitly. However, in some complex cases e.g. conditional statements, the compiler can’t determine the return type and explicit specification is required.
+Parameters
+These parameters are similar to the function parameters in every way.
+Capture Clause
+A lambda expression can have more power than an ordinary function by having access to variables from the enclosing scope. We can capture external variables from the enclosing scope in three ways using
+capture clause
+:
+[&]:
+capture all external variables by reference.
+[=]:
+capture all external variables by value.
+[a, &b]:
+capture 'a' by value and 'b' by reference.
+A lambda with an empty capture clause [] can only access variables which are local to it.
+C++
+#include
+<iostream>
+#include
+<vector>
+using
+namespace
+std
+;
+void
+print
+(
+vector
+<
+int
+>
+v
+)
+{
+for
+(
+auto
+x
+:
+v
+)
+cout
+<<
+x
+<<
+" "
+;
+cout
+<<
+endl
+;
+}
+int
+main
+()
+{
+vector
+<
+int
+>
+v1
+,
+v2
+;
+//  Capture all by reference
+auto
+byRef
+=
+[
+&
+](
+int
+m
+)
+{
+v1
+.
+push_back
+(
+m
+);
+v2
+.
+push_back
+(
+m
+);
+};
+//  Capture all by value
+auto
+byVal
+=
+[
+=
+](
+int
+m
+)
+mutable
+{
+v1
+.
+push_back
+(
+m
+);
+v2
+.
+push_back
+(
+m
+);
+};
+//  Capture v1 by reference and v2 by value
+auto
+mixed
+=
+[
+&
+v1
+,
+v2
+](
+int
+m
+)
+mutable
+{
+v1
+.
+push_back
+(
+m
+);
+v2
+.
+push_back
+(
+m
+);
+};
+// Case 1: byRef — modifies both v1 and v2
+byRef
+(
+20
+);
+// Case 2: byVal — modifies only copies (originals unchanged)
+byVal
+(
+234
+);
+// Case 3: mixed — modifies only v1 (since v2 is captured by value)
+mixed
+(
+10
+);
+print
+(
+v1
+);
+print
+(
+v2
+);
+return
+0
+;
+}
+Output
+20 10 
+20
+Let's understand what happened in this program:
+byRef
+captures all by reference. So pushing
+20
+will push it into original
+v1
+and
+v2
+.
+byVal
+captures all by value. So pushing
+234
+will not do anything to original vectors.
+mixed
+captures
+v1
+by reference and
+v2
+by value. So pushing
+10
+will only push it into
+v1.
+The
+mutable
+keyword here is used in capture by value lambdas only because, by default, value captured objects are
+const
+.
+Examples
+Lamda expressions are extensively used in STL in place of callback i.e. functions passed as arguments. The below examples demonstrate that:
+Sort Vector in Descending Order
+C++
+#include
+<iostream>
+#include
+<vector>
+#include
+<algorithm>
+using
+namespace
+std
+;
+int
+main
+()
+{
+vector
+<
+int
+>
+v
+=
+{
+5
+,
+1
+,
+8
+,
+3
+,
+9
+,
+2
+};
+// Sort in descending order
+sort
+(
+v
+.
+begin
+(),
+v
+.
+end
+(),
+[]
+(
+const
+int
+&
+a
+,
+const
+int
+&
+b
+)
+{
+return
+a
+>
+b
+;
+});
+for
+(
+int
+x
+:
+v
+)
+cout
+<<
+x
+<<
+" "
+;
+return
+0
+;
+}
+Output
+9 8 5 3 2 1
+Find First Number Divisible by 3
+CPP
+#include
+<iostream>
+#include
+<vector>
+#include
+<algorithm>
+using
+namespace
+std
+;
+int
+main
+()
+{
+vector
+<
+int
+>
+v
+=
+{
+5
+,
+1
+,
+8
+,
+3
+,
+9
+,
+2
+};
+// Sort in descending order
+auto
+it
+=
+find_if
+(
+v
+.
+begin
+(),
+v
+.
+end
+(),
+[]
+(
+const
+int
+&
+a
+)
+{
+return
+a
+%
+3
+==
+0
+;
+});
+if
+(
+it
+!=
+v
+.
+end
+())
+cout
+<<
+*
+it
+;
+else
+cout
+<<
+"No such element"
+;
+return
+0
+;
+}
+Output
+3
+Applications
+Lambda expressions' main purpose was to replace the functions in callbacks by providing inline definitions. Following are the common applications of lambda expressions in C++
+Inline, Anonymous Functions
+: Write small functions directly where needed without naming them.
+STL Algorithms
+: Pass custom comparison or transformation logic to algorithms like sort, for_each, etc.
+Callbacks and Event Handling
+: Use lambdas as callbacks for asynchronous operations or event handlers.
+Threading and Concurrency
+: Pass lambdas to threads for quick, inline tasks without defining separate functions.
+Custom Comparators in Containers
+: Use lambdas as comparators for containers like priority_queue, set, etc.
+Create Quiz
+Lamda Expressions in C++
+Visit Course
+Comment
+K
+kartik
+187
+Improve
+K
+kartik
+187
+Improve
+Article Tags :
+C++
+cpp-advanced

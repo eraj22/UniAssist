@@ -1,0 +1,267 @@
+Title: Recursion
+URL: https://www.geeksforgeeks.org/cpp/cpp-recursion/
+Source: GeeksforGeeks
+Course: Programming Fundamentals
+
+================================================================================
+
+Recursion
+is a programming technique where a function calls itself repeatedly until a specific base condition is met. A function that performs such self-calling behavior is known as a
+recursive function
+, and each instance of the function calling itself is called a
+recursive call
+.
+C++
+#include
+<iostream>
+using
+namespace
+std
+;
+void
+printHello
+(
+int
+n
+)
+{
+// Base Case
+if
+(
+n
+==
+0
+)
+return
+;
+cout
+<<
+"Hello"
+<<
+endl
+;
+printHello
+(
+n
+-
+1
+);
+}
+int
+main
+()
+{
+printHello
+(
+5
+);
+return
+0
+;
+}
+Output
+Hello
+Hello
+Hello
+Hello
+Hello
+This code demonstrates a simple recursive function that prints the word "Hello" five times. The function printHello(n) calls itself with a decremented value of n until it reaches the base case n == 0, at which point the recursion stops. Each recursive call prints "Hello" before making the next call, resulting in the message being printed once per call from n = 5 down to n = 1.
+Recursive Function
+A function that calls itself is called a
+recursive function
+. When a recursive function is called, it executes a set of instructions and then calls itself to execute the same set of instructions with a smaller input. A recursive function should contain,
+Recursive Case
+: Recursive case is the way in which the recursive call is present in the function.
+Base Condition:
+The base condition is the condition that is used to terminate the recursion.
+C++
+returntype
+function
+(
+parameters
+)
+{
+// base case
+if
+(
+base
+condition
+)
+{
+return
+base
+value
+;
+}
+// recursive case
+return
+recursive
+expression
+involving
+function
+(
+modified
+parameters
+);
+}
+This structure allows problems to be broken down into simpler versions of themselves, making recursion a powerful tool for solving problems that can be defined in terms of smaller instances.
+According to this, from the first example, we can deduce that:
+Base Condition
+if (n == 0) return;
+Recursive Case
+printHello(n - 1);
+How Recursion Works?
+To understand how recursion works internally, it’s important to see how the
+call stack
+behaves during recursive calls. Each time a function calls itself, the current state is saved on the stack, and the new call begins. Once the base case is reached, the function starts returning back, one call at a time.
+The following example demonstrates both the
+descending phase
+(going deeper into recursion) and the
+ascending phase
+(returning back from recursion):
+C++
+#include
+<iostream>
+using
+namespace
+std
+;
+void
+f
+(
+int
+n
+)
+{
+cout
+<<
+"F("
+<<
+n
+<<
+")'s Stack Frame Pushed
+\n
+"
+;
+if
+(
+n
+>
+1
+)
+{
+f
+(
+n
+-
+1
+);
+f
+(
+n
+-
+1
+);
+}
+cout
+<<
+"F("
+<<
+n
+<<
+")'s Stack Frame Removed
+\n
+"
+;
+}
+int
+main
+()
+{
+f
+(
+3
+);
+return
+0
+;
+}
+Output
+F(3)'s Stack Frame Pushed
+F(2)'s Stack Frame Pushed
+F(1)'s Stack Frame Pushed
+F(1)'s Stack Frame Removed
+F(1)'s Stack Frame Pushed
+F(1)'s Stack Frame Removed
+F(2)'s Stack Frame Removed
+F(2)'s Stack Fr...
+In this program, the function f(int n) prints a message when a new recursive call is made (Stack Frame Pushed) and when it finishes (Stack Frame Removed). This provides a clear view of how stack frames are added and removed during recursion.
+Descending Phase
+: The function keeps calling itself with n - 1 as long as n > 1. This is the phase where the call stack grows. Each call pushes a new stack frame and pauses until its recursive calls complete.
+Ascending Phase
+: Once n is no longer greater than 1, the base case is reached, and the function begins to return. As each call completes, its stack frame is removed, and control moves back to the previous call. This unwinding of the stack is the ascending phase.
+For f(3), the function follows a pattern similar to a binary tree with recursive calls branching left and right. The output shows exactly when each function call begins and ends, helping visualize the stack behavior during recursion.
+Illustrations:
+This example follows a
+tree recursion
+pattern, where each function call makes multiple recursive calls (in this case, two). It’s one of the common forms of recursion. To explore more patterns like
+linear recursion
+,
+tail recursion
+, and
+indirect recursion
+, check out our detailed article on
+Types of Recursion.
+Memory Management in Recursion
+Like other functions, the data of a recursive function is stored in stack memory as a stack frame. This stack frame is removed once the function returns a value. In recursion,
+The function call occurs before returning a value, so the stack frames for each recursive call are placed on top of the existing stack frames in memory.
+Once the topmost function returns a value, its stack frame is removed, and control is passed back to the function just before it, resuming execution after the point where the recursive call was made.
+The compiler uses an instruction pointer to keep track of the location to return to after the function execution is complete.
+Unlike iteration, recursion relies on the call stack, making memory management a key differentiator between the two.
+Refer these article to know more about
+Function Call Stack
+,
+Difference between recursion and iteration
+What is Stack Overflow?
+Stack overflow is one of the most common errors associated with the recursion which occurs when a function calls itself too many times. As we know that each recursive call requires separate space in the limited stack memory. When there is a large number of recursive calls or recursion goes on infinite times, this stack memory may get exhausted and may not be able to store more data leading to programs' termination.
+Applications of Recursion
+Recursion has many applications in computer science and programming. Here are some of the most common applications of recursion:
+Solving:
+Fibonacci sequences, Factorial Function, Reversing an array, Tower of Hanoi.
+Backtracking:
+It is a technique for solving problems by trying out different solutions and undoing them if they do not work. Recursive algorithms are often used in backtracking.
+Searching and Sorting Algorithms:
+Many searching and sorting algorithms, such as binary search and quicksort, use recursion to divide the problem into smaller sub-problems.
+Tree and Graph Traversal:
+Recursive algorithms are often used to traverse trees and graphs, such as depth-first search and breadth-first search.
+Mathematical Computations:
+Recursion is also used in many mathematical computations, such as the factorial function and the Fibonacci sequence.
+Dynamic Programming:
+It is a technique for solving optimization problems by breaking them down into smaller sub-problems. Recursive algorithms are often used in dynamic programming.
+Overall, recursion is a powerful and versatile technique that can be used to solve a wide range of problems in programming and computer science.
+Drawbacks of Recursion
+Performance:
+Recursive algorithms can be less efficient than iterative algorithms in some cases, particularly if the data structure is large or if the recursion goes too deep.
+Memory usage:
+Recursive algorithms can use a lot of memory, particularly if the recursion goes too deep or if the data structure is large. Each recursive call creates a new stack frame on the call stack, which can quickly add up to a significant amount of memory usage.
+Code complexity:
+Recursive algorithms can be more complex than iterative algorithms.
+Debugging:
+Recursive algorithms can be more difficult to debug than iterative algorithms, particularly if the recursion goes too deep or if the program is using multiple recursive calls.
+Stack Overflow:
+If the recursion goes too deep, it can cause a stack overflow error, which can crash the program.
+Create Quiz
+Comment
+N
+nishitjain24
+Follow
+14
+Improve
+N
+nishitjain24
+Follow
+14
+Improve
+Article Tags :
+Recursion
+C++

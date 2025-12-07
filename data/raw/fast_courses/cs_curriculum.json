@@ -1,0 +1,64 @@
+{
+  "program": "BS Computer Science",
+  "total_credit_hours": 133,
+  "semesters": 8,
+  "courses": [
+    {
+      "semester": 1,
+      "courses": [
+        {
+          "code": "CS-101",
+          "name": "Programming Fundamentals",
+          "credit_hours": 4,
+          "lab": true,
+          "description": "Introduction to programming using C++. Covers basic programming concepts, control structures, functions, arrays, and file handling.",
+          "prerequisites": null,
+          "category": "Core"
+        },
+        {
+          "code": "MT-101",
+          "name": "Calculus and Analytical Geometry",
+          "credit_hours": 3,
+          "lab": false,
+          "description": "Fundamental concepts of calculus including limits, derivatives, and integrals.",
+          "prerequisites": null,
+          "category": "Math"
+        },
+        {
+          "code": "EE-119",
+          "name": "Applied Physics",
+          "credit_hours": 3,
+          "lab": true,
+          "description": "Basic physics concepts with applications in computer science.",
+          "prerequisites": null,
+          "category": "Science"
+        }
+      ]
+    },
+    {
+      "semester": 2,
+      "courses": [
+        {
+          "code": "CS-201",
+          "name": "Object Oriented Programming",
+          "credit_hours": 4,
+          "lab": true,
+          "description": "Advanced programming concepts using object-oriented paradigm. Covers classes, inheritance, polymorphism, and design patterns.",
+          "prerequisites": "CS-101",
+          "category": "Core"
+        },
+        {
+          "code": "CS-200",
+          "name": "Discrete Structures",
+          "credit_hours": 3,
+          "lab": false,
+          "description": "Mathematical foundations for computer science including logic, sets, relations, and graph theory.",
+          "prerequisites": null,
+          "category": "Core"
+        }
+      ]
+    }
+  ],
+  "source": "FAST NUCES Islamabad",
+  "scraped_at": "2025-12-07 16:33:45"
+}

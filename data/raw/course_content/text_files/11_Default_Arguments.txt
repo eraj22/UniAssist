@@ -1,0 +1,368 @@
+Title: Default Arguments
+URL: https://www.geeksforgeeks.org/cpp/default-arguments-c/
+Source: GeeksforGeeks
+Course: Programming Fundamentals
+
+================================================================================
+
+A default argument is a value provided for a parameter in a function declaration that is automatically assigned by the compiler if no value is provided for those parameters in function.
+Default arguments must be present on the right side only. Once a default argument is provided, all the arguments to its right must also be defaults.
+It is recommended to specify them in function declaration (usually in the header).
+C++
+#include
+<iostream>
+using
+namespace
+std
+;
+// Function with an argument
+// with default value
+void
+f
+(
+int
+a
+=
+10
+)
+{
+cout
+<<
+a
+<<
+endl
+;
+}
+int
+main
+()
+{
+// Uses default argument
+f
+();
+// Uses passed value
+f
+(
+221
+);
+return
+0
+;
+}
+Output
+10
+221
+Explanation
+: In this program, the function f has a default argument a = 10, so when no argument is provided, a defaults to 10, which is printed. When 221 is passed, a becomes 221 which is then printed.
+Syntax
+A default argument is defined by assigning a value to a function parameter in its declaration.
+C++
+return_type
+name
+(
+p1
+=
+v1
+,
+p2
+=
+v2
+,
+...);
+where
+v1, v2, ...
+are the default values for the parameters
+p1, p2,
+... respectively.
+Rules to Follow
+There are some important rules and best practices to keep in mind when using default arguments in C++:
+1. Default Values Should be Specified in Function Declarations
+The default values for parameters should be specified in the function declaration (or prototype). If a function is declared and defined separately, the default values must be in the declaration, not in definition.
+C++
+// Declaration with default argument
+void
+func
+(
+int
+x
+=
+10
+);
+// Definition without default argument
+void
+func
+(
+int
+x
+)
+{
+cout
+<<
+"Value: "
+<<
+x
+<<
+endl
+;
+}
+2. Default Arguments Cannot Be Modified
+Once default arguments are defined in the declaration, they cannot be modified in the function definition. If you try to change the default value in the definition, it will result in a compilation error.
+C++
+// Declaration
+void
+f
+(
+int
+a
+=
+10
+);
+// This definintion will throw and error
+void
+f
+(
+int
+a
+=
+222
+)
+{
+// statements
+}
+3. Default Arguments Must Be Provided from Right to Left
+In a function with multiple parameters, default values must be provided from the rightmost parameter to the left. It means that if a parameter has a default argument, all parameters to its right must also have default values.
+C++
+// Valid
+void
+func
+(
+int
+x
+,
+int
+y
+=
+20
+);
+// Invalid, as `y` does not have a default value
+void
+func
+(
+int
+x
+=
+10
+,
+int
+y
+);
+4. Ambiguity in Function Overloading
+If a function containing default arguments is overloaded, then we need to make sure it is not ambiguous to the compiler, otherwise it will throw an error.
+C++
+// Valid
+void
+f
+(
+int
+a
+=
+10
+,
+int
+b
+=
+20
+);
+// Will throw error as the signature is same
+void
+f
+(
+int
+a
+=
+22
+,
+int
+b
+=
+2
+);
+// Will also throw error
+void
+f
+(
+int
+a
+);
+// Will also throw an error
+void
+f
+(
+int
+a
+,
+b
+)
+Examples
+The following examples demonstrate the use of default arguments in different cases:
+Find Area of Rectangle with Optional Length
+We want to keep the rectangle height optional in case it is not provided to the area calculator function. One approach could be to create two overloaded functions, one that takes two parameters and one that takes one. However, this can be simplified by using default arguments instead of
+function overloading
+by specifying optional values.
+C++
+#include
+<iostream>
+using
+namespace
+std
+;
+// Function with default height 'h' argument
+double
+calcArea
+(
+double
+l
+,
+double
+h
+=
+10.0
+)
+{
+return
+l
+*
+h
+;
+}
+int
+main
+()
+{
+cout
+<<
+"Area 1:  "
+<<
+calcArea
+(
+5
+)
+<<
+endl
+;
+cout
+<<
+"Area 2: "
+<<
+calcArea
+(
+5
+,
+9
+);
+return
+0
+;
+}
+Output
+Area 1:  50
+Area 2: 45
+Combine Default and Parameterized Constructor
+Just like normal functions, we can also define default values for the arguments of
+parameterized constructors
+. All the rules of the default arguments will be applied to these parameters.
+C++
+#include
+<iostream>
+using
+namespace
+std
+;
+class
+A
+{
+public
+:
+int
+data
+;
+// Parameterized constructor with default values
+A
+(
+int
+x
+=
+5
+)
+{
+data
+=
+x
+;
+}
+};
+int
+main
+()
+{
+A
+a1
+;
+A
+a2
+(
+25
+);
+cout
+<<
+a1
+.
+data
+<<
+endl
+;
+cout
+<<
+a2
+.
+data
+;
+return
+0
+;
+}
+Output
+5
+25
+Explanation:
+In the above program, we create a class with a parameterized constructor that has a default argument. When we create an object without passing any argument, the constructor uses its default value of x = 5. However, when we pass an argument, the constructor uses the passed value of x = 25.
+If the default values are not well-documented or understood, it can lead to confusion about what arguments are being used.
+Can default arguments be specified in the function definition?
+No, default values should only appear in the declaration.
+What happens if a function with default arguments is called with extra arguments?
+If you provide more arguments than the function expects, the provided arguments are used for the corresponding parameters, and the remaining parameters use their default values.
+Can default arguments be used with overloaded functions?
+Yes, but be cautious of ambiguity. Overloaded functions with default arguments can cause confusion if the compiler can't determine which version to call.
+What happens when default arguments are used in virtual functions in C++?
+Default arguments can be used in virtual functions. However, when a derived class overrides a base class function, the default arguments of the base class are not inherited. If the derived class provides new default arguments, it may lead to different behaviour.
+Can default arguments be used for template parameters?
+Yes, default arguments can be specified for
+template
+parameters as well.
+Create Quiz
+Default Arguments in C++ Functions
+Visit Course
+Comment
+K
+kartik
+Follow
+221
+Improve
+K
+kartik
+Follow
+221
+Improve
+Article Tags :
+C++
+CPP-Functions
