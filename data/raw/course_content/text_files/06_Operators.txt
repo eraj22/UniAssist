@@ -810,3 +810,47 @@ Article Tags :
 Misc
 C++
 cpp-operator
+================================================================================
+CODE EXAMPLES (4):
+================================================================================
+
+Example 6:
+```cpp
+a + b = 11
+a - b = 5
+a * b = 24
+a / b = 2
+a % b = 2
+++a = 9
+--b = 2
+```
+
+Example 9:
+```cpp
+a == b is 0
+a > b is 1
+a >= b is 1
+a < b is 0
+a <= b is 0
+a != b is 1
+```
+
+Example 16:
+```cpp
+a & b is 4
+a | b is 6
+a ^ b is 2
+a<<1 is 12
+a>>1 is 3
+~(a) is -7
+```
+
+Example 19:
+```cpp
+a = 6
+a += b is 10
+a -= b is 6
+a *= b is 24
+a /= b is 6
+```
+

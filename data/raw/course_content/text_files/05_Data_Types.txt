@@ -459,3 +459,26 @@ C++
 CPP-Basics
 school-programming
 CBSE - Class 11
+
+================================================================================
+IMAGES (1):
+================================================================================
+
+Image 1: 0c291fe0_img_01.png
+  Path: data\raw\course_content\images\0c291fe0_img_01.png
+  Alt: Data-Type-in-C-2
+  Context: Data types specify the type of data that a variable can store. Whenever a variable is defined in C++...
+
+
+================================================================================
+CODE EXAMPLES (1):
+================================================================================
+
+Example 27:
+```cpp
+Size of int: 4 bytes
+Size of char: 1 byte
+Size of float: 4 bytes
+Size of double: 8 bytes
+```
+

@@ -82,3 +82,23 @@ Improve
 Article Tags :
 C++
 CPP-Basics
+
+================================================================================
+IMAGES (3):
+================================================================================
+
+Image 1: 7ec281fc_img_01.png
+  Path: data\raw\course_content\images\7ec281fc_img_01.png
+  Alt: main_features_of_c_language
+  Context:  | Caption: ...
+
+Image 2: 7ec281fc_img_02.png
+  Path: data\raw\course_content\images\7ec281fc_img_02.png
+  Alt: prim_s_algorithm_14
+  Context:  | Caption: ...
+
+Image 3: 7ec281fc_img_03.png
+  Path: data\raw\course_content\images\7ec281fc_img_03.png
+  Alt: cpp-history
+  Context: C++ is a general-purpose programming language that was developed by Bjarne Stroustrup as an enhancem...
+

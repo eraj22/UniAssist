@@ -172,3 +172,13 @@ Improve
 Article Tags :
 C++
 CPP-Basics
+
+================================================================================
+IMAGES (1):
+================================================================================
+
+Image 1: de83f4c3_img_01.png
+  Path: data\raw\course_content\images\de83f4c3_img_01.png
+  Alt: examples of valid and invalid identifiers
+  Context: Example of Valid/Invalid Identifiers | Caption: Example of Valid/Invalid Identifiers...
+

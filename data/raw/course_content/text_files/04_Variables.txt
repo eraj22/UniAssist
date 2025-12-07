@@ -315,3 +315,22 @@ Improve
 Article Tags :
 C++
 CPP-Basics
+
+================================================================================
+IMAGES (3):
+================================================================================
+
+Image 1: 28f55bb4_img_01.png
+  Path: data\raw\course_content\images\28f55bb4_img_01.png
+  Context:  | Caption: ...
+
+Image 3: 28f55bb4_img_03.png
+  Path: data\raw\course_content\images\28f55bb4_img_03.png
+  Alt: Video Thumbnail
+  Context: Variable Naming Rules...
+
+Image 4: 28f55bb4_img_04.png
+  Path: data\raw\course_content\images\28f55bb4_img_04.png
+  Alt: Video Thumbnail
+  Context: Variables and Data Types in C++...
+

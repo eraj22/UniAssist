@@ -252,3 +252,13 @@ Improve
 Article Tags :
 C++
 CPP-Functions
+
+================================================================================
+IMAGES (1):
+================================================================================
+
+Image 1: 9adebf27_img_01.png
+  Path: data\raw\course_content\images\9adebf27_img_01.png
+  Alt: inline
+  Context:  | Caption: ...
+

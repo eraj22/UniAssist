@@ -423,3 +423,33 @@ C++
 Geeks Premier League
 CPP-Basics
 Geeks Premier League 2023
+
+================================================================================
+IMAGES (6):
+================================================================================
+
+Image 2: d0461a1e_img_02.png
+  Path: data\raw\course_content\images\d0461a1e_img_02.png
+  Alt: cpp decision making statements
+  Context:  | Caption: ...
+
+Image 3: d0461a1e_img_03.png
+  Path: data\raw\course_content\images\d0461a1e_img_03.png
+  Context:  | Caption: ...
+
+Image 4: d0461a1e_img_04.png
+  Path: data\raw\course_content\images\d0461a1e_img_04.png
+  Context:  | Caption: ...
+
+Image 5: d0461a1e_img_05.png
+  Path: data\raw\course_content\images\d0461a1e_img_05.png
+  Context:  | Caption: ...
+
+Image 5: d0461a1e_img_05.png
+  Path: data\raw\course_content\images\d0461a1e_img_05.png
+  Context:  | Caption: ...
+
+Image 7: d0461a1e_img_07.png
+  Path: data\raw\course_content\images\d0461a1e_img_07.png
+  Context:  | Caption: ...
+

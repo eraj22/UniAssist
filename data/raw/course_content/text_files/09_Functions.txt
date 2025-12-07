@@ -396,3 +396,28 @@ Improve
 Article Tags :
 C++
 CPP-Functions
+
+================================================================================
+IMAGES (4):
+================================================================================
+
+Image 1: 05324c55_img_01.png
+  Path: data\raw\course_content\images\05324c55_img_01.png
+  Alt: Why-Use-Functions__
+  Context:  | Caption: ...
+
+Image 3: 05324c55_img_03.png
+  Path: data\raw\course_content\images\05324c55_img_03.png
+  Alt: Video Thumbnail
+  Context: Functions in C++...
+
+Image 4: 05324c55_img_04.png
+  Path: data\raw\course_content\images\05324c55_img_04.png
+  Alt: Video Thumbnail
+  Context: Applications of Functions....
+
+Image 5: 05324c55_img_05.png
+  Path: data\raw\course_content\images\05324c55_img_05.png
+  Alt: Video Thumbnail
+  Context: How Functions Work in C++?...
+

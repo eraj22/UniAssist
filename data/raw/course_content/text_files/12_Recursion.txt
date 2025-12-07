@@ -265,3 +265,19 @@ Improve
 Article Tags :
 Recursion
 C++
+================================================================================
+CODE EXAMPLES (1):
+================================================================================
+
+Example 8:
+```cpp
+F(3)'s Stack Frame Pushed
+F(2)'s Stack Frame Pushed
+F(1)'s Stack Frame Pushed
+F(1)'s Stack Frame Removed
+F(1)'s Stack Frame Pushed
+F(1)'s Stack Frame Removed
+F(2)'s Stack Frame Removed
+F(2)'s Stack Fr...
+```
+
