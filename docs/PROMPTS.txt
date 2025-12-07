@@ -1,0 +1,424 @@
+1. Text & LLM Projects
+Project Ideas
+1. Fine-tune a small LLM on a domain (medical/education/legal) for specialized text
+generation.
+2. Build a retrieval-augmented chatbot (RAG) using vector search + generative responses
+for a specific use case.
+3. Prompt-based story generation with controllable plot elements.
+4. Multi-document summarization e.g., summarizing multiple research papers or should
+be able to summarize the financial documents given in the form of text or images,
+should extract correct format from PDF, images or excel sheets etc.
+5. Generate coding solutions + automatic test cases from problem statements.
+6. Grammar and fluency correction tool using a fine-tuned GPT-like models for Urdu
+language.
+7. Automatic question generation from textbooks or lecture notes. Verifiable results and
+format the question as per needs like MCQ, detailed questions etc. LLM should also be
+able to verify the answers.
+8. Multi-language translation and summarization using a small generative model.
+Theoretical Knowledge Needed
+• - NLP basics: tokenization, embeddings, transformer architecture.
+• - Sequence modeling: autoregressive and encoder-decoder paradigms.
+• - Attention mechanisms and positional encodings.
+• - Fine-tuning methods, parameter-efficient techniques (LoRA, adapters).
+• - Retrieval-augmented generation (RAG) and dense retrieval (FAISS).
+• - Evaluation metrics: BLEU, ROUGE, METEOR, perplexity, human eval.i  want you to help me implemen this UNIASSIST PROJECT and make sure all requirements are fullfilled based in the rubric.First quide me on how to implement the entire project on vs code and then we will continue with the research paper .these are the websites from which i need to scrap the data https://bulletin.wustl.edu/search/?search=E81+CSE+240+Logic+and+Discrete+Mathematics ,https://bulletin.wustl.edu/search/?P=E81%20CSE%20247,https://bulletin.wustl.edu/search/?search=CSE+332S,for now  i am scrapping data or making teh entire project based on only 3 courses  atm .i want you to guide me step by step  on how to implement this  ,make checkpoints,for example let in step 1 guide me on how to setup the envireoment and then when i confirm the enviroment has been setup continue next .(i need to make commits as well)
+
+
+
+
+
+
+
+(venv) PS C:\Users\Sher Zaman\UniAssist> mkdir -p src/{agents,api,processing,vectorstore,embeddings,scraper}
+At line:1 char:21
++ mkdir -p src/{agents,api,processing,vectorstore,embeddings,scraper}
++                     ~
+Missing argument in parameter list.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : MissingArgumenti m getting this as output
+
+
+
+
+
+
+
+### Step 6: Create Essential Files Create these files in your project root: **requirements.txt** ``` fastapi==0.104.1 uvicorn==0.24.0 langchain==0.1.0 langchain-community==0.0.10 sentence-transformers==2.2.2 chromadb==0.4.18 pymupdf==1.23.8 beautifulsoup4==4.12.2 requests==2.31.0 python-multipart==0.0.6 pydantic==2.5.0 pytest==7.4.3 pytest-cov==4.1.0 python-dotenv==1.0.0 openai==1.3.0 ``` **.gitignore** ``` # Python __pycache__/ *.py[cod] *$py.class *.so .Python venv/ env/ ENV/ # Data data/chroma_db/ *.pdf *.csv # IDE .vscode/ .idea/ *.swp *.swo # Environment .env # Testing .coverage htmlcov/ .pytest_cache/ # Docker *.log how to do ths?
+
+
+# API Keys (add your keys later)
+OPENAI_API_KEY=your_key_here
+# Model Configuration
+EMBEDDING_MODEL=sentence-transformers/all-MiniLM-L6-v2
+LLM_MODEL=gpt-3.5-turbo
+# ChromaDB Configuration
+CHROMA_PERSIST_DIR=./data/chroma_db i dont understand where do i get my api key ?
+
+
+when i ran the requirements file i get this at the end error: metadata-generation-failed
+× Encountered error while generating package metadata.
+╰─> See above for output.
+note: This is an issue with the package mentioned above, not pip.
+hint: See above for details.
+
+
+(venv) PS C:\Users\Sher Zaman\UniAssist> code .env
+(venv) PS C:\Users\Sher Zaman\UniAssist> git add .
+(venv) PS C:\Users\Sher Zaman\UniAssist> git commit -m "[SETUP] Initial project structure and dependencies"
+[master (root-commit) ebc5f83] [SETUP] Initial project structure and dependencies
+ 2 files changed, 49 insertions(+)
+ create mode 100644 readme.md
+ create mode 100644 requirements.txt
+(venv) PS C:\Users\Sher Zaman\UniAssist> git remote add origin "https://github.com/eraj22/UniAssist.git"
+(venv) PS C:\Users\Sher Zaman\UniAssist> git remote -v
+origin  https://github.com/eraj22/UniAssist.git (fetch)
+origin  https://github.com/eraj22/UniAssist.git (push)
+(venv) PS C:\Users\Sher Zaman\UniAssist> git branch -M main
+(venv) PS C:\Users\Sher Zaman\UniAssist> git push -u origin main
+info: please complete authentication in your browser...
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 896 bytes | 448.00 KiB/s, done.
+Total 4 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To https://github.com/eraj22/UniAssist.git
+ * [new branch]      main -> main
+branch 'main' set up to track 'origin/main'.
+(venv) PS C:\Users\Sher Zaman\UniAssist> git push -u origin main
+branch 'main' set up to track 'origin/main'.
+Everything up-to-date i am getting this
+
+
+
+i  can only see this in the json 
+
+```json
+[
+  {
+    "page_title": "Search Results | Washington University Bulletin",
+    "description": "There are no results for \"E81 CSE 240 Logic and Discrete Mathematics\" in the 2025-26 edition. Here are some results from previous editions:",
+    "source_url": "https://bulletin.wustl.edu/search/?search=E81+CSE+240+Logic+and+Discrete+Mathematics",
+    "scraped_at": "2025-12-07 12:50:06"
+  },
+  {
+    "page_title": "Search Results | Washington University Bulletin",
+    "description": "There are no results for \"E81 CSE 247\" in the 2025-26 edition. Here are some results from previous editions:",
+    "source_url": "https://bulletin.wustl.edu/search/?P=E81%20CSE%20247",
+    "scraped_at": "2025-12-07 12:50:09"
+  },
+  {
+    "page_title": "Search Results | Washington University Bulletin",
+    "description": "There are no results for \"CSE 332S\" in the 2025-26 edition. Here are some results from previous editions:",
+    "source_url": "https://bulletin.wustl.edu/search/?search=CSE+332S",
+    "scraped_at": "2025-12-07 12:50:11"
+  }
+] but is this correct?
+```
+
+
+
+
+donot use mock data
+
+according to the proposal and project requiremnet what prereqs should we have like a website having notes and info regarding the course ,pastpapers relevant to that course which i will provide manually and Fast university website that will provide details of the course such as credit hours etc
+
+so heres what we have to do now ,keeping the project idea same ,i will give you the link to the website from which i want you to download the data for a specific course ,you will use selenium to scrape it .i will provide you a git hub link which has pastpapers of fast nuces islamabad and then the official website of fast nuces islamabad from which you have to scrape data regardinng courses etc becaus ewe need this information for our project .am i missing smthg else for this part pf the project ?
+
+https://www.geeksforgeeks.org/cpp/c-plus-plus/ this is the link for pf for c++ website that has notes regarding Programming fundamentals and this is the link https://github.com/nuces-isb-past-papers/fsc-past-papers/tree/main/semester-1/PF that has all pf past papers of the university FAST NUCES islamabd with solutions provided as well and finally this https://isb.nu.edu.pk is the official fast nuces website that only has information regarding what courses the university is offering and the credit outs etc.based on my project proposal  i want to implement a rag system   for The course Programming fundamentals that can answer questions regradinf the pf course and also provide the relevant pastpaper questions to the student etc.i have implemented the setup enviroment now what do i do next ?
+
+i have noticed you have not extracted the relevant pictures which were provided in the geek for geeks website for example to explain some concepts picture can explain those concepts  better .i want that if the student asks a question the rag system can explain to the student throught not only pictures but text as well
+
+so the scrapping part is done ,i have the pastpapers ,notes from the website and course infromation from the uni website ,now what next to do ?i want the student to be able to ask questions regarding the pf  course ,and based on the data the rag system should answer him .i.e the student can upload his own notes ,pastpapers ,pdfs or slides and ask the system to explain the slides or whatever he provides,he can ask thesystem to make a quiz from the pastpapers  and the notes /slides he provides or from the already scrapped data we have ,he can ask the system to list the questions asked in the pastpaper on the topic ,he can submit the quiz and the system can recheck it ,the system can also provides summaries etc.the student can ask course details etc and the system can answer .
+
+
+so the scrapping part is done ,i have the pastpapers ,notes from the website and course infromation from the uni website ,now what next to do ?i want the student to be able to ask questions regarding the pf  course ,and based on the data the rag system should answer him .i.e the student can upload his own notes ,pastpapers ,pdfs or slides and ask the system to explain the slides or whatever he provides,he can ask thesystem to make a quiz from the pastpapers  and the notes /slides he provides or from the already scrapped data we have ,he can ask the system to list the questions asked in the pastpaper on the topic ,he can submit the quiz and the system can recheck it ,the system can also provides summaries etc.the student can ask course details etc and the system can answer .
+
+
+
+(venv) PS C:\Users\Sher Zaman\UniAssist> code src\processing\pdf_processor.py
+(venv) PS C:\Users\Sher Zaman\UniAssist> python src\processing\pdf_processor.py
+======================================================================
+PDF PROCESSOR - STEP 1
+======================================================================
+📄 Processing Past Papers...
+Found 22 PDF files in data\raw\past_papers
+======================================================================
+Processing: AIDS 22F PF Mid1.pdf
+  Type: past_paper
+  ✗ Error processing AIDS 22F PF Mid1.pdf: document closed
+Processing: PF Final Exam (Fall-2023).pdf
+  Type: past_paper
+  ✗ Error processing PF Final Exam (Fall-2023).pdf: document closed
+Processing: PF Final Exam (Solution) (Fall-2022).pdf
+  Type: past_paper
+  ✗ Error processing PF Final Exam (Solution) (Fall-2022).pdf: document closed
+Processing: PF Final Exam (Solution) (Spring-2024).pdf
+  Type: past_paper
+  ✗ Error processing PF Final Exam (Solution) (Spring-2024).pdf: document closed
+Processing: PF Final-Exam Fall-2013.pdf
+  Type: past_paper
+  ✗ Error processing PF Final-Exam Fall-2013.pdf: document closed
+Processing: PF Final-Exam Spring 2018.pdf
+  Type: past_paper
+  ✗ Error processing PF Final-Exam Spring 2018.pdf: document closed
+Processing: PF Final-Exam Spring 2019.pdf
+  Type: past_paper
+  ✗ Error processing PF Final-Exam Spring 2019.pdf: document closed
+Processing: PF Mid-1 Fall-2013.pdf
+  Type: past_paper
+  ✗ Error processing PF Mid-1 Fall-2013.pdf: document closed
+Processing: PF Mid-1 Fall-2014.pdf
+  Type: past_paper
+  ✗ Error processing PF Mid-1 Fall-2014.pdf: document closed
+Processing: PF Mid-1 Fall-2015 (Solution-Q2-Q3-Q4-Q5).pdf
+  Type: past_paper
+  ✗ Error processing PF Mid-1 Fall-2015 (Solution-Q2-Q3-Q4-Q5).pdf: document closed
+Processing: PF Mid-2 Fall-2013.pdf
+  Type: past_paper
+  ✗ Error processing PF Mid-2 Fall-2013.pdf: document closed
+Processing: PF Mid-2 Fall-2014.pdf
+  Type: past_paper
+  ✗ Error processing PF Mid-2 Fall-2014.pdf: document closed
+Processing: PF Mid-2 Fall-2015.pdf
+  Type: past_paper
+  ✗ Error processing PF Mid-2 Fall-2015.pdf: document closed
+Processing: PF Mid-2 Spring-2017.pdf
+  Type: past_paper
+  ✗ Error processing PF Mid-2 Spring-2017.pdf: document closed
+Processing: PF Mid-2 Spring-2018.pdf
+  Type: past_paper
+  ✗ Error processing PF Mid-2 Spring-2018.pdf: document closed
+Processing: PF Mid-Exam Fall-2018.pdf
+  Type: past_paper
+  ✗ Error processing PF Mid-Exam Fall-2018.pdf: document closed
+Processing: PF Practice Exam.pdf
+  Type: past_paper
+  ✗ Error processing PF Practice Exam.pdf: document closed
+Processing: PF Sample Final Exam.pdf
+  Type: past_paper
+  ✗ Error processing PF Sample Final Exam.pdf: document closed
+Processing: PF Sessional-I (Fall-22) (BS-CS) (Solution).pdf
+  Type: past_paper
+  ✗ Error processing PF Sessional-I (Fall-22) (BS-CS) (Solution).pdf: document closed
+Processing: PF Sessional-II (Fall-20) (Solution).pdf
+  Type: past_paper
+  ✗ Error processing PF Sessional-II (Fall-20) (Solution).pdf: document closed
+Processing: PF Sessional-II (Fall-22) (BS-AI_DS).pdf
+  Type: past_paper
+  ✗ Error processing PF Sessional-II (Fall-22) (BS-AI_DS).pdf: document closed
+Processing: PF Sessional-II (Fall-22) (BS-CS).pdf
+  Type: past_paper
+  ✗ Error processing PF Sessional-II (Fall-22) (BS-CS).pdf: document closed
+======================================================================
+✓ Successfully processed 0/22 files
+======================================================================
+SUMMARY
+======================================================================
+Past Papers Processed: 0
+Total Pages: 0
+Total Words: 0
+Total Images: 0
+======================================================================
+✓ STEP 1 COMPLETE!
+Next: Run text chunking (Step 2)
+(venv) PS C:\Users\Sher Zaman\UniAssist> i am getting this as output
+
+
+
+(venv) PS C:\Users\Sher Zaman\UniAssist> python src\processing\pdf_processor.py
+======================================================================
+PDF PROCESSOR - STEP 1
+======================================================================
+📄 Processing Past Papers...
+Found 22 PDF files in data\raw\past_papers
+======================================================================
+Processing: AIDS 22F PF Mid1.pdf
+  Type: past_paper
+  ✓ Extracted: 5 pages, 744 words, 0 images
+Processing: PF Final Exam (Fall-2023).pdf
+  Type: past_paper
+  ✓ Extracted: 17 pages, 51 words, 17 images
+Processing: PF Final Exam (Solution) (Fall-2022).pdf
+  Type: past_paper
+  ✓ Extracted: 15 pages, 1909 words, 0 images
+Processing: PF Final Exam (Solution) (Spring-2024).pdf
+  Type: past_paper
+  ✓ Extracted: 12 pages, 2711 words, 4 images
+Processing: PF Final-Exam Fall-2013.pdf
+  Type: past_paper
+  ✓ Extracted: 20 pages, 2433 words, 0 images
+Processing: PF Final-Exam Spring 2018.pdf
+  Type: past_paper
+  ✓ Extracted: 32 pages, 4257 words, 0 images
+Processing: PF Final-Exam Spring 2019.pdf
+  Type: past_paper
+  ✓ Extracted: 21 pages, 2967 words, 3 images
+Processing: PF Mid-1 Fall-2013.pdf
+  Type: past_paper
+  ✓ Extracted: 9 pages, 685 words, 0 images
+Processing: PF Mid-1 Fall-2014.pdf
+  Type: past_paper
+  ✓ Extracted: 10 pages, 1141 words, 0 images
+Processing: PF Mid-1 Fall-2015 (Solution-Q2-Q3-Q4-Q5).pdf
+  Type: past_paper
+  ✓ Extracted: 11 pages, 1574 words, 3 images
+Processing: PF Mid-2 Fall-2013.pdf
+  Type: past_paper
+  ✓ Extracted: 8 pages, 1079 words, 0 images
+Processing: PF Mid-2 Fall-2014.pdf
+  Type: past_paper
+  ✓ Extracted: 8 pages, 974 words, 2 images
+Processing: PF Mid-2 Fall-2015.pdf
+  Type: past_paper
+  ✓ Extracted: 10 pages, 1486 words, 0 images
+Processing: PF Mid-2 Spring-2017.pdf
+  Type: past_paper
+  ✓ Extracted: 13 pages, 2117 words, 0 images
+Processing: PF Mid-2 Spring-2018.pdf
+  Type: past_paper
+  ✓ Extracted: 13 pages, 2230 words, 0 images
+Processing: PF Mid-Exam Fall-2018.pdf
+  Type: past_paper
+  ✓ Extracted: 12 pages, 1273 words, 2 images
+Processing: PF Practice Exam.pdf
+  Type: past_paper
+  ✓ Extracted: 10 pages, 729 words, 160 images
+Processing: PF Sample Final Exam.pdf
+  Type: past_paper
+  ✓ Extracted: 22 pages, 2973 words, 0 images
+Processing: PF Sessional-I (Fall-22) (BS-CS) (Solution).pdf
+  Type: past_paper
+  ✓ Extracted: 10 pages, 1372 words, 1 images
+Processing: PF Sessional-II (Fall-20) (Solution).pdf
+  Type: past_paper
+  ✓ Extracted: 4 pages, 416 words, 0 images
+Processing: PF Sessional-II (Fall-22) (BS-AI_DS).pdf
+  Type: past_paper
+  ✓ Extracted: 8 pages, 1859 words, 0 images
+Processing: PF Sessional-II (Fall-22) (BS-CS).pdf
+  Type: past_paper
+  ✓ Extracted: 10 pages, 1387 words, 1 images
+======================================================================
+✓ Successfully processed 22/22 files
+✓ Saved processed data to: data\processed\past_papers_processed.json
+======================================================================
+SUMMARY
+======================================================================
+Past Papers Processed: 22
+Total Pages: 280
+Total Words: 36,367
+Total Images: 193
+======================================================================
+✓ STEP 1 COMPLETE!
+ i am getting this as my output ,next
+
+
+
+when i run rag_system i get this as my output (venv) PS C:\Users\Sher Zaman\UniAssist> python src\agents\rag_system.py
+======================================================================
+STEP 4: RAG SYSTEM TEST
+======================================================================
+======================================================================
+INITIALIZING PF COURSE ASSISTANT
+======================================================================
+Initializing Retriever Agent...
+✓ Connected to vector store (92 documents)
+Initializing Answer Agent...
+✓ Connected to Ollama (model: llama3.2)
+Initializing Quiz Agent...
+✓ Quiz Agent ready
+Initializing Summary Agent...
+✓ Summary Agent ready
+✓ All agents initialized!
+======================================================================
+======================================================================
+TEST 1: Question Answering
+======================================================================
+Question: What are pointers in C++?
+Answer: Error calling Ollama: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=60)
+Sources: PF Final Exam (Solution) (Spring-2024).pdf, PF Final-Exam Spring 2019.pdf, PF Sessional-II (Fall-20) (Solution).pdf
+======================================================================
+TEST 2: Quiz Generation
+======================================================================
+Topic: arrays
+Generated 0 questions
+======================================================================
+✓ STEP 4 COMPLETE!
+======================================================================
+Your RAG system is working!
+Next: Build FastAPI backend (Step 5)
+
+i see the website its smthg like this ,how do i check it
+
+
+
+
+i am getting this in my powerahel  when i ran the api (venv) PS C:\Users\Sher Zaman\UniAssist> python src\api\main.py
+C:\Users\Sher Zaman\UniAssist\src\api\main.py:89: DeprecationWarning:
+        on_event is deprecated, use lifespan event handlers instead.
+        Read more about it in the
+        [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+  @app.on_event("startup")
+======================================================================
+STARTING UNIASSIST API
+======================================================================
+API will be available at:
+  - Local:   http://localhost:8000
+  - Docs:    http://localhost:8000/docs
+  - Redoc:   http://localhost:8000/redoc
+Press Ctrl+C to stop the server
+======================================================================
+INFO:     Started server process [32064]
+INFO:     Waiting for application startup.
+======================================================================
+STARTING UNIASSIST API SERVER
+======================================================================
+======================================================================
+INITIALIZING PF COURSE ASSISTANT
+======================================================================
+Initializing Retriever Agent...
+✓ Connected to vector store (92 documents)
+Initializing Answer Agent...
+✓ Connected to Ollama (model: llama3.2:1b)
+Initializing Quiz Agent...
+✓ Quiz Agent ready
+Initializing Summary Agent...
+✓ Summary Agent ready
+✓ All agents initialized!
+======================================================================
+✓ UniAssist API is ready!
+======================================================================
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:64221 - "GET /docs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64221 - "GET /openapi.json HTTP/1.1" 200 OK
+Question: string
+INFO:     127.0.0.1:62542 - "POST /ask HTTP/1.1" 200 OK
+Question: what is recursion.give answer in only 2 lines
+INFO:     127.0.0.1:49703 - "POST /ask HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49705 - "POST /quiz/generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49703 - "POST /summarize HTTP/1.1" 422 Unprocessable Content
+Processing: PF Final Exam (Solution) (Spring-2024).pdf
+  Type: notes
+  ✓ Extracted: 12 pages, 2711 words, 4 images
+Chunking: PF Final Exam (Solution) (Spring-2024).pdf
+  Type: past_paper
+  ✓ Created 6 chunks
+Initializing Embedding Generator...
+  Loading embedding model: sentence-transformers/all-MiniLM-L6-v2
+  ✓ Model loaded (dimension: 384)
+  Initializing ChromaDB at: data\chroma_db
+  ✓ ChromaDB collection: pf_course_docs
+  ✓ Current documents in collection: 92
+======================================================================
+ADDING CHUNKS TO VECTOR STORE
+======================================================================
+Generating embeddings for 6 texts...
+Embedding batches: 100%|██████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  1.82it/s]
+✓ Generated 6 embeddings
+Adding 6 chunks to ChromaDB...
+✓ Successfully added 6 chunks to vector store
+✓ Total documents in collection: 92
+INFO:     127.0.0.1:63190 - "POST /upload-pdf?doc_type=notes HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62360 - "POST /quiz/generate HTTP/1.1" 200 OK
