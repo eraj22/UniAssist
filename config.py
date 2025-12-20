@@ -1,1 +1,1 @@
-LLM_BACKEND = "ollama"   # "ollama" or "gemma"
+LLM_BACKEND = "gemma"   # "ollama" or "gemma"
