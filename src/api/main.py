@@ -102,7 +102,7 @@ async def startup_event():
         print(f"\n✗ Error initializing assistant: {e}")
         print("Make sure:")
         print("  1. ChromaDB is populated (run embedding_generator.py)")
-        print("  2. Ollama is running (ollama serve)")
+        print("  2. LLM is running ")
         print("="*70)
 
 
