@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import List, Dict, Optional
 from sentence_transformers import SentenceTransformer
 import chromadb
-from config import LLM_BACKEND
+from api.config import LLM_BACKEND
 
 
 class RetrieverAgent:
