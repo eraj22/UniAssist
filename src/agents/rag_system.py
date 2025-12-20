@@ -85,32 +85,7 @@ class AnswerAgent:
             'sources': [doc['metadata']['source_document'] for doc in context_docs[:3]],
             'context_used': len(context_docs)
         }
-    def generate_answer(self, query: str, context_docs: List[Dict]) -> Dict:
-        """
-        Generate answer using retrieved context
-        
-        Args:
-            query: User question
-            context_docs: Retrieved documents from vector store
-            
-        Returns:
-            Dictionary with answer and metadata
-        """
-        # Build context from retrieved documents
-        context = self._build_context(context_docs)
-        
-        # Create prompt
-        prompt = self._create_prompt(query, context)
-        
-        # Generate answer
-        answer = self.llm.generate(prompt)
-        
-        return {
-            'question': query,
-            'answer': answer,
-            'sources': [doc['metadata']['source_document'] for doc in context_docs[:3]],
-            'context_used': len(context_docs)
-        }
+    
     
     def _build_context(self, docs: List[Dict]) -> str:
         """Build context string from documents"""
