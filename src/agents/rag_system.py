@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import List, Dict, Optional
 from sentence_transformers import SentenceTransformer
 import chromadb
+from config import LLM_BACKEND
 
 
 class RetrieverAgent:
@@ -66,21 +67,24 @@ class RetrieverAgent:
 
 
 class AnswerAgent:
-    """Generates answers using Ollama LLM"""
-    
-    def __init__(self, model_name: str = "llama3.2:1b", ollama_url: str = "http://localhost:11434"):
+    """Generates answers using a pluggable LLM backend"""
+
+    def __init__(self, llm):
         print("Initializing Answer Agent...")
-        self.model_name = model_name
-        self.ollama_url = ollama_url
-        self.api_endpoint = f"{ollama_url}/api/generate"
-        
-        # Test connection
-        try:
-            response = requests.get(f"{ollama_url}/api/tags", timeout=5)
-            print(f"✓ Connected to Ollama (model: {model_name})")
-        except:
-            print("⚠ Warning: Could not connect to Ollama. Make sure it's running.")
-    
+        self.llm = llm
+        print("✓ Answer Agent ready")
+
+    def generate_answer(self, query: str, context_docs: List[Dict]) -> Dict:
+        context = self._build_context(context_docs)
+        prompt = self._create_prompt(query, context)
+        answer = self.llm.generate(prompt)
+
+        return {
+            'question': query,
+            'answer': answer,
+            'sources': [doc['metadata']['source_document'] for doc in context_docs[:3]],
+            'context_used': len(context_docs)
+        }
     def generate_answer(self, query: str, context_docs: List[Dict]) -> Dict:
         """
         Generate answer using retrieved context
@@ -98,8 +102,8 @@ class AnswerAgent:
         # Create prompt
         prompt = self._create_prompt(query, context)
         
-        # Generate answer using Ollama
-        answer = self._call_ollama(prompt)
+        # Generate answer
+        answer = self.llm.generate(prompt)
         
         return {
             'question': query,
@@ -138,26 +142,7 @@ Instructions:
 Answer:"""
         
         return prompt
-    
-    def _call_ollama(self, prompt: str) -> str:
-        """Call Ollama API"""
-        try:
-            payload = {
-                "model": self.model_name,
-                "prompt": prompt,
-                "stream": False
-            }
-            
-            response = requests.post(self.api_endpoint, json=payload, timeout=180)
-            
-            if response.status_code == 200:
-                result = response.json()
-                return result.get('response', 'No response generated')
-            else:
-                return f"Error: Could not generate answer (Status: {response.status_code})"
-                
-        except Exception as e:
-            return f"Error calling Ollama: {str(e)}"
+
 
 
 class QuizAgent:
@@ -214,7 +199,8 @@ Topic: {topic}
 Generate questions now:"""
         
         # Generate quiz
-        quiz_text = self.answer_agent._call_ollama(prompt)
+        quiz_text = self.answer_agent.llm.generate(prompt)
+
         
         # Parse questions (basic parsing)
         questions = self._parse_quiz(quiz_text)
@@ -302,7 +288,12 @@ class SummaryAgent:
         print("Initializing Summary Agent...")
         self.answer_agent = answer_agent
         print("✓ Summary Agent ready")
-    
+
+    def clean_text(text: str) -> str:
+        text = text.encode("utf-8", "ignore").decode("utf-8")
+        text = text.replace("\x00", "")
+        return text.strip()
+
     def summarize_document(self, text: str, summary_type: str = "concise") -> str:
         """
         Summarize a document
@@ -314,6 +305,13 @@ class SummaryAgent:
         Returns:
             Summary text
         """
+        cleaned_text = clean_text(text)
+
+        if not cleaned_text:
+            return "Error: Empty document content"
+
+        content = cleaned_text[:2000]
+
         if summary_type == "concise":
             instruction = "Provide a concise 3-4 sentence summary"
         elif summary_type == "detailed":
@@ -326,11 +324,12 @@ class SummaryAgent:
 {instruction}:
 
 Content:
-{text[:3000]}
+{content}
 
 Summary:"""
         
-        summary = self.answer_agent._call_ollama(prompt)
+        summary = self.answer_agent.llm.generate(prompt)
+
         return summary
 
 
@@ -344,8 +343,17 @@ class PFCourseAssistant:
         print("="*70)
         
         # Initialize all agents
+        if LLM_BACKEND == "ollama":
+            from llm.ollama_llm import OllamaLLM
+            llm = OllamaLLM()
+
+        elif LLM_BACKEND == "gemma":
+            from llm.gemma_llm import GemmaLLM
+            llm = GemmaLLM()
+
+        self.answer_agent = AnswerAgent(llm)
+
         self.retriever = RetrieverAgent()
-        self.answer_agent = AnswerAgent()
         self.quiz_agent = QuizAgent(self.answer_agent, self.retriever)
         self.summary_agent = SummaryAgent(self.answer_agent)
         
